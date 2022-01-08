@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/HP/Documents/GitHub/ToDoApp/app/src/main/res/drawable/ic_add_24.xml" value="0.2203125" />
+        <entry key="..\:/Users/HP/Documents/GitHub/ToDoApp/app/src/main/res/drawable/ic_no_data.xml" value="0.2203125" />
         <entry key="..\:/Users/HP/Documents/GitHub/ToDoApp/app/src/main/res/layout/activity_main.xml" value="0.11503623188405797" />
+        <entry key="..\:/Users/HP/Documents/GitHub/ToDoApp/app/src/main/res/layout/fragment_add.xml" value="0.14719202898550723" />
+        <entry key="..\:/Users/HP/Documents/GitHub/ToDoApp/app/src/main/res/layout/fragment_list.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>
@@ -12,5 +16,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.14719202898550723" />
+      </ProjectState>
+    </option>
   </component>
 </project>
