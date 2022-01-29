@@ -14,7 +14,7 @@ import com.example.todoapp.data.viewmodel.ToDoViewModel
 import kotlinx.android.synthetic.main.fragment_add.*
 
 class AddFragment : Fragment() {
-    private val toDoViewModel: ToDoViewModel by viewModels()
+    private val mToDoViewModel: ToDoViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,20 +41,20 @@ class AddFragment : Fragment() {
     }
 
     private fun insertDataToDB() {
-        val title = title_et.text.toString()
-        val priority = priorities_spinner.selectedItem.toString()
-        val description = description_et.text.toString()
+        val mTitle = title_et.text.toString()
+        val mPriority = priorities_spinner.selectedItem.toString()
+        val mDescription = description_et.text.toString()
 
-        val validation = verifyDataFromUser(title, description)
+        val validation = verifyDataFromUser(mTitle, mDescription)
         if (validation) {
             // Insert Data to Database
             val newData = ToDoData(
                 0,
-                title,
-                parsePriority(priority),
-                description
+                mTitle,
+                parsePriority(mPriority),
+                mDescription
             )
-            toDoViewModel.insertData(newData)
+            mToDoViewModel.insertData(newData)
             Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_SHORT).show()
             // Navigate Back
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
