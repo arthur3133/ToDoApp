@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.R
 import com.example.todoapp.data.models.Priority
@@ -45,6 +46,11 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
                     R.color.green
                 )
             )
+        }
+
+        holder.itemView.item_row.setOnClickListener {
+            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(dataList[position])
+            holder.itemView.findNavController().navigate(action)
         }
     }
 
