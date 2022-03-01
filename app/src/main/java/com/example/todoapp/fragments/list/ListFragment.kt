@@ -82,7 +82,6 @@ class ListFragment : Fragment() {
             adapter.notifyItemChanged(position)
         }
         snackBar.show()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
