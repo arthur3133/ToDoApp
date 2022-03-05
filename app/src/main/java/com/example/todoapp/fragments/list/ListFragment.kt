@@ -45,7 +45,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
         // Set Menu
         setHasOptionsMenu(true)
-        return binding.root;
+        return binding.root
     }
 
     private fun setupRecyclerview() {
@@ -67,14 +67,14 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
                 mToDoViewModel.deleteItem(deletedItem)
                 adapter.notifyItemRemoved(viewHolder.adapterPosition)
                 // Restore Deleted Item
-                restoreDeleteData(viewHolder.itemView, deletedItem, viewHolder.adapterPosition)
+                restoreDeleteData(viewHolder.itemView, deletedItem)
             }
         }
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
-    private fun restoreDeleteData(view: View, deletedItem: ToDoData, position: Int) {
+    private fun restoreDeleteData(view: View, deletedItem: ToDoData) {
         val snackBar = Snackbar.make(
             view,"Deleted '${deletedItem.title}'",
             Snackbar.LENGTH_LONG
