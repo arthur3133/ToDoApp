@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.*
 import com.example.todoapp.R
 import com.example.todoapp.data.models.ToDoData
@@ -29,7 +28,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Data binding
         _binding = FragmentListBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
@@ -39,7 +38,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         setupRecyclerview()
 
         // Observe LiveData
-        mToDoViewModel.getAllData.observe(viewLifecycleOwner, Observer { data ->
+        mToDoViewModel.getAllData.observe(viewLifecycleOwner, { data ->
             mSharedViewModel.checkIfDatabaseEmpty(data)
             adapter.setData(data)
         })
@@ -55,7 +54,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private fun setupRecyclerview() {
         val recyclerView = binding.recyclerView
-        recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        recyclerView.layoutManager =
+            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         recyclerView.adapter = adapter
         recyclerView.itemAnimator = SlideInUpAnimator().apply {
             addDuration = 300
@@ -81,7 +81,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private fun restoreDeleteData(view: View, deletedItem: ToDoData) {
         val snackBar = Snackbar.make(
-            view,"Deleted '${deletedItem.title}'",
+            view, "Deleted '${deletedItem.title}'",
             Snackbar.LENGTH_LONG
         )
         snackBar.setAction("UNDO") {
@@ -101,8 +101,12 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_delete_all -> confirmRemoval()
-            R.id.menu_priority_high -> mToDoViewModel.sortByHighPriority.observe(this, { adapter.setData(it)})
-            R.id.menu_priority_low -> mToDoViewModel.sortByLowPriority.observe(this, { adapter.setData(it)})
+            R.id.menu_priority_high -> mToDoViewModel.sortByHighPriority.observe(
+                this,
+                { adapter.setData(it) })
+            R.id.menu_priority_low -> mToDoViewModel.sortByLowPriority.observe(
+                this,
+                { adapter.setData(it) })
         }
         return super.onOptionsItemSelected(item)
     }
@@ -135,8 +139,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Delete everything?")
         builder.setMessage("Are you sure you want to remove everything?")
-        builder.setNegativeButton("No") {_, _ ->}
-        builder.setPositiveButton("Yes") {_, _ ->
+        builder.setNegativeButton("No") { _, _ -> }
+        builder.setPositiveButton("Yes") { _, _ ->
             mToDoViewModel.deleteAll()
             Toast.makeText(
                 requireContext(),
