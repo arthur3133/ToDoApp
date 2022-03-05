@@ -49,7 +49,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
         // Hide soft keyboard
         hideKeyboard(requireActivity())
-        
+
         return binding.root
     }
 
